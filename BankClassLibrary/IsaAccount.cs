@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankClassLibrary
 {
-    public class IsaAccount : Account
+    public class IsaAccount : Account, IWithdrawable, IDepositable
     {
         private decimal YearlyLimit = 20000M;
 
@@ -26,10 +26,16 @@ namespace BankClassLibrary
             base.DisplayDetails();
             Console.WriteLine($"The yearly limit left on ISA is: {limitLeft()}");
 
+        }
 
-           
-          
-      
+        public override void Withdraw(decimal amount)
+        {
+            if (AccountBalance < amount)
+            {
+                Console.WriteLine("You cannot go in Overdraft");
+                return;
+            }
+            base.Withdraw(amount);
         }
 
 

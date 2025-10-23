@@ -62,7 +62,7 @@ while (active)
         Console.Write("Enter Sort Code: ");
         string newSortCode = Console.ReadLine();
 
-        Console.Write("Enter Account Type (Current/Savings/Credit): ");
+        Console.Write("Enter Account Type (Current/Savings/Credit/ISA): ");
         string newAccountType = Console.ReadLine();
 
         
@@ -77,12 +77,30 @@ while (active)
             Console.WriteLine("\nAccount created successfully!");
             isa.DisplayDetails();
         }
-        else 
-        { 
-            Account newAccount = new Account(newBalance, newAccountNumber, newSortCode, newAccountName, newAccountType);
+        else if(newAccountType == "Current")
+        {
+            CurrentAccount newAccount = new CurrentAccount(newBalance, newAccountNumber, newSortCode, newAccountName, newAccountType);
             accounts.Add(newAccount);
             Console.WriteLine("\nAccount created successfully!");
             newAccount.DisplayDetails();
+        }
+        else if (newAccountType == "Savings")
+        {
+            SavingsAccount newAccount = new SavingsAccount(newBalance, newAccountNumber, newSortCode, newAccountName, newAccountType);
+            accounts.Add(newAccount);
+            Console.WriteLine("\nAccount created successfully!");
+            newAccount.DisplayDetails();
+        }
+        else if (newAccountType == "Credit")
+        {
+            CreditAccount newAccount = new CreditAccount(newBalance, newAccountNumber, newSortCode, newAccountName, newAccountType);
+            accounts.Add(newAccount);
+            Console.WriteLine("\nAccount created successfully!");
+            newAccount.DisplayDetails();
+        }
+        else
+        {
+            Console.WriteLine("Not a valid account type");
 
         }
 

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.Design;
 namespace BankClassLibrary
 {
-    public class Account
+    public class Account : IDepositable, IWithdrawable
     {
-        private decimal accountBalance;
+        protected decimal accountBalance;
         private string accountNumber;
         private string sortCode;
         private string accountName;
@@ -90,14 +90,8 @@ namespace BankClassLibrary
             }
 
         }
-        public void Withdraw(decimal amount)
+        public virtual void Withdraw(decimal amount)
         {
-            
-            if ((this.accountType == "Current" || this.accountType == "Savings" || this.accountType == "ISA") && accountBalance < amount)
-            {
-                Console.WriteLine("You cannot go in Overdraft");
-                return; 
-            }
             Console.WriteLine($"-£{amount} was withdrawn from the Account");
             accountBalance -= amount;
             DisplayDetails();
