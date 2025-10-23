@@ -65,15 +65,27 @@ while (active)
         Console.Write("Enter Account Type (Current/Savings/Credit): ");
         string newAccountType = Console.ReadLine();
 
+        
+
         Console.Write("Enter Initial Balance: £");
         decimal newBalance = decimal.Parse(Console.ReadLine());
 
-        
-        Account newAccount = new Account(newBalance, newAccountNumber, newSortCode, newAccountName, newAccountType);
-        accounts.Add(newAccount);
+        if (newAccountType == "ISA")
+        {
+            IsaAccount isa = new IsaAccount(newBalance, newAccountNumber, newSortCode, newAccountName, newAccountType);
+            accounts.Add(isa);
+            Console.WriteLine("\nAccount created successfully!");
+            isa.DisplayDetails();
+        }
+        else 
+        { 
+            Account newAccount = new Account(newBalance, newAccountNumber, newSortCode, newAccountName, newAccountType);
+            accounts.Add(newAccount);
+            Console.WriteLine("\nAccount created successfully!");
+            newAccount.DisplayDetails();
 
-        Console.WriteLine("\nAccount created successfully!");
-        newAccount.DisplayDetails();
+        }
+
     }
     else if (option == 3)
     {

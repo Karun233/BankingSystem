@@ -12,15 +12,16 @@ namespace BankClassLibrary
         {
             "Current",
             "Savings",
-            "Credit"
+            "Credit",
+            "ISA"
         };
         public Account(decimal AccountBalance, string AccountNumber, string SortCode, string AccountName, string AccountType)
         {
             this.accountBalance = AccountBalance;
-            this.accountNumber = AccountNumber;
-            this.sortCode = SortCode;
-            this.accountName = AccountName;
-            this.accountType = AccountType;
+            this.AccountNumber = AccountNumber;  
+            this.SortCode = SortCode;            
+            this.AccountName = AccountName;      
+            this.AccountType = AccountType;      
         }
         public decimal AccountBalance
         {
@@ -59,6 +60,22 @@ namespace BankClassLibrary
                 accountNumber = value;
             }
         }
+
+
+        
+        public string SortCode
+        {
+            get { return sortCode; }
+            set { sortCode = value; }
+        }
+
+        
+        public string AccountType
+        {
+            get { return accountType; }
+            set { accountType = value; }
+        }
+
         public void Deposit(decimal amount)
         {
             if (amount < 0)
@@ -76,7 +93,7 @@ namespace BankClassLibrary
         public void Withdraw(decimal amount)
         {
             
-            if ((this.accountType == "Current" || this.accountType == "Savings") && accountBalance < amount)
+            if ((this.accountType == "Current" || this.accountType == "Savings" || this.accountType == "ISA") && accountBalance < amount)
             {
                 Console.WriteLine("You cannot go in Overdraft");
                 return; 
@@ -85,8 +102,9 @@ namespace BankClassLibrary
             accountBalance -= amount;
             DisplayDetails();
         }
-        public void DisplayDetails()
+        public virtual void DisplayDetails()
         {
+ 
             Console.WriteLine($"Account Name: {accountName}");
             Console.WriteLine($"Account Number: {accountNumber}");
             Console.WriteLine($"Account Sortcode: {sortCode}");
